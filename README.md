@@ -1,252 +1,250 @@
 # 💳 CrediScore — Analizador de Riesgo Financiero con Machine Learning
 
-> Sistema inteligente que predice la capacidad de pago de una persona mediante un modelo de Machine Learning, entregando un score financiero, decisión crediticia y recomendaciones personalizadas a través de una interfaz web profesional.
+> Sistema inteligente de análisis crediticio que predice la capacidad de pago de una persona, genera un score financiero personalizado y entrega recomendaciones accionables a través de una interfaz web profesional.
 
 ---
 
-## 📌 Problema o necesidad que quisimos solucionar
+## 🧭 Resumen Ejecutivo
 
-Muchas personas no saben con certeza si pueden asumir una deuda sin comprometer su estabilidad financiera. Bancos y entidades crediticias tienen herramientas complejas para esto, pero el usuario común no tiene acceso a ese análisis.
+**CrediScore** es una solución de inteligencia artificial orientada a democratizar el análisis crediticio. Muchas personas no tienen acceso a las herramientas que usan bancos y entidades financieras para evaluar si pueden asumir una deuda de forma responsable.
 
-**CrediScore** resuelve ese problema: dada la información financiera básica de una persona (ingresos, gastos y monto de la deuda), el sistema predice si ese perfil tiene capacidad de pago, entrega un score de 0 a 100, calcula el plazo ideal de la deuda y genera una recomendación personalizada.
+Con solo ingresar sus **ingresos, gastos y el monto a financiar**, el sistema:
+
+- Predice la probabilidad de pago usando un modelo de **Regresión Logística** entrenado con 1.150 perfiles financieros
+- Calcula un **score de riesgo de 0 a 100** con semáforo visual (bajo / medio / alto)
+- Determina el **plazo óptimo de pago** automáticamente
+- Emite una decisión **APROBADO / RECHAZADO** con justificación clara
+- Genera una **recomendación personalizada** con pasos concretos
 
 ---
 
-## 🧰 Librerías, frameworks y recursos utilizados
+## 📌 Problema y Solución
 
-### Backend (Python)
+El usuario común no tiene acceso a las herramientas que usan bancos para evaluar riesgo crediticio. CrediScore llena ese vacío: dado un perfil financiero básico, el sistema analiza la situación, predice el comportamiento de pago y guía al usuario con información clara y accionable — sin jerga financiera.
+
+---
+
+## 🧰 Stack Tecnológico
+
+### Backend — Python
+
 | Librería | Uso |
 |---|---|
-| `FastAPI` | Framework para construir la API REST |
-| `uvicorn` | Servidor ASGI para correr la API |
-| `scikit-learn` | Modelo de Machine Learning (Regresión Logística, escalado, validación cruzada) |
-| `pandas` | Carga y manipulación del dataset (.xlsx) |
-| `numpy` | Operaciones matriciales y vectoriales |
-| `openpyxl` | Lectura de archivos Excel (.xlsx) |
-| `pydantic` | Validación de datos de entrada en la API |
+| `FastAPI` | Framework para la API REST |
+| `uvicorn` | Servidor ASGI |
+| `scikit-learn` | Regresión Logística, StandardScaler, validación cruzada |
+| `pandas` | Carga y manipulación del dataset |
+| `numpy` | Operaciones matriciales |
+| `openpyxl` | Lectura de archivos `.xlsx` |
+| `pydantic` | Validación de datos de entrada |
 
-### Frontend (HTML/CSS/JS)
+### Frontend — Web
+
 | Recurso | Uso |
 |---|---|
-| HTML5 + CSS3 | Estructura y estilos de la interfaz |
-| JavaScript (Vanilla) | Lógica de la interfaz, llamadas a la API, renderizado de resultados |
-| Chart.js 4.4.1 | Visualizaciones: gauge de score, barras de probabilidad, donut, proyección de ahorro |
-| Google Fonts | Tipografías: Playfair Display, Epilogue, JetBrains Mono |
+| HTML5 + CSS3 | Estructura y estilos |
+| JavaScript (Vanilla) | Lógica de interfaz y llamadas a la API |
+| Chart.js 4.4.1 | Gauge de score, barras de probabilidad, donut, proyección de ahorro |
+| Google Fonts | Playfair Display, Epilogue, JetBrains Mono |
 
 ---
 
-## 🗂️ Cómo construimos el dataset
+## 🗂️ Dataset
 
-El dataset fue generado con datos sintéticos (mock data) que simulan perfiles financieros reales de Colombia, almacenados en `Datos.xlsx` en la hoja `MOCK_DATA`.
+Dataset sintético que simula perfiles financieros reales de Colombia, almacenado en `Datos.xlsx` (hoja: `MOCK_DATA`).
 
-**Columnas del dataset:**
-
-| Columna | Descripción | Rango aproximado |
+| Columna | Descripción | Rango |
 |---|---|---|
-| `Gastos` | Gastos mensuales del cliente (COP) | $200.000 – $181.000.000 |
-| `Ingresos` | Ingresos mensuales del cliente (COP) | $511.000 – $199.000.000 |
-| `Deuda` | Monto total de la deuda a financiar (COP) | $5.373 – $199.000.000 |
+| `Gastos` | Gastos mensuales (COP) | $200.000 – $181.000.000 |
+| `Ingresos` | Ingresos mensuales (COP) | $511.000 – $199.000.000 |
+| `Deuda` | Monto total a financiar (COP) | $5.373 – $199.000.000 |
 | `Tiempo` | Plazo en meses | 3 – 60 meses |
-| `PagaDeuda` | Variable objetivo: 1 = paga, 0 = no paga | Binaria |
+| `PagaDeuda` | Variable objetivo (1 = paga, 0 = no paga) | Binaria |
 
-Los perfiles cubren distintos estratos económicos y niveles de riesgo para que el modelo aprenda a distinguir entre clientes que sí pueden pagar y los que no.
+Los perfiles cubren distintos estratos económicos para que el modelo aprenda a distinguir clientes de bajo, medio y alto riesgo.
 
----
-
-## 📊 Cantidad de entradas utilizadas para entrenar el modelo
-
-- **Total de registros:** 1.150 perfiles
-- **Registros que sí pagan (clase 1):** 675 → 58.7%
-- **Registros que no pagan (clase 0):** 475 → 41.3%
-- **División entrenamiento / prueba:** 70% / 30% (805 train — 345 test)
+**Distribución del dataset:**
+- Total de registros: **1.150 perfiles**
+- Sí pagan (clase 1): **675 → 58.7%**
+- No pagan (clase 0): **475 → 41.3%**
+- División: **70% entrenamiento / 30% prueba** (805 train — 345 test)
 
 ---
 
-## 🤖 Modelos de Machine Learning utilizados
-
-Se evaluó y utilizó el siguiente modelo:
+## 🤖 Modelo de Machine Learning
 
 ### Regresión Logística (`LogisticRegression`)
-- Modelo de clasificación binaria supervisada
-- Predice la probabilidad de que una persona **pague** o **no pague** su deuda
-- Entrenado con las 4 variables del perfil financiero: `Gastos`, `Ingresos`, `Deuda`, `Tiempo`
-- Los datos se normalizan con `StandardScaler` antes del entrenamiento
-- Parámetros: `max_iter=1000`, `random_state=42`
+
+Modelo de clasificación binaria supervisada que predice la probabilidad de que una persona pague o no pague su deuda, entrenado sobre 4 variables: `Gastos`, `Ingresos`, `Deuda` y `Tiempo`. Los datos se normalizan con `StandardScaler` antes del entrenamiento (`max_iter=1000`, `random_state=42`).
+
+**¿Por qué este modelo?**
+
+1. **Interpretabilidad** — entrega probabilidades directas (ej. "78% de probabilidad de pagar"), fundamentales para explicar una decisión crediticia
+2. **Adecuación al problema** — clasificación binaria es exactamente su caso de uso
+3. **Eficiencia** — con 1.150 registros y 4 features, un modelo simple generaliza mejor que uno complejo
+4. **Ligereza** — se serializa y sirve en tiempo real sin latencia apreciable
 
 ---
 
-## 🎯 Por qué elegimos este modelo
-
-1. **Interpretabilidad:** La Regresión Logística entrega probabilidades directas (ej. "78.3% de probabilidad de pagar"), lo que es fundamental para explicar una decisión crediticia al usuario.
-
-2. **Adecuación al problema:** El problema es de clasificación binaria (paga / no paga), que es exactamente el caso de uso para el que fue diseñada la Regresión Logística.
-
-3. **Eficiencia:** Con 1.150 registros y 4 features, un modelo sencillo generaliza mejor que uno complejo que podría sobreajustarse.
-
-4. **Facilidad de despliegue:** El modelo es liviano y se puede serializar y servir en tiempo real desde la API sin latencia.
-
----
-
-## 📈 Nivel de efectividad — Métricas obtenidas
+## 📈 Métricas de Desempeño
 
 | Métrica | Valor |
 |---|---|
-| **Accuracy en test set** | 72.75% |
-| **Accuracy con validación cruzada (CV=5)** | 68.09% promedio |
-| **Desviación estándar CV** | ±10.74% |
+| Accuracy en test set | **72.75%** |
+| Accuracy validación cruzada (CV=5) | **68.09%** promedio |
+| Desviación estándar CV | ±10.74% |
 
-### Reporte de clasificación (conjunto de prueba — 345 registros):
+**Reporte de clasificación — 345 registros de prueba:**
 
 | Clase | Precision | Recall | F1-Score | Support |
 |---|---|---|---|---|
-| **No Paga (0)** | 0.68 | 0.56 | 0.61 | 133 |
-| **Sí Paga (1)** | 0.75 | 0.83 | 0.79 | 212 |
-| **Promedio ponderado** | 0.72 | 0.73 | 0.72 | 345 |
+| No Paga (0) | 0.68 | 0.56 | 0.61 | 133 |
+| Sí Paga (1) | 0.75 | 0.83 | 0.79 | 212 |
+| **Promedio ponderado** | **0.72** | **0.73** | **0.72** | **345** |
 
-> El modelo muestra mejor desempeño identificando a quienes sí pagan (recall 83%), lo cual es adecuado para un analizador orientado al usuario: es más conservador aprobando que rechazando.
-
----
-
-## 🔮 Predicciones generadas por el sistema
-
-Para cada perfil ingresado, el modelo produce:
-
-1. **Probabilidad de pago** → `predict_proba()` devuelve dos valores:
-   - `prob[0]` = probabilidad de NO pagar (ej. 31.2%)
-   - `prob[1]` = probabilidad de SÍ pagar (ej. 68.8%)
-
-2. **Decisión binaria** → `APROBADO` si `score ≥ 50` y `excedente > 0`, de lo contrario `RECHAZADO`
-
-3. **Score financiero 0–100** → calculado con las 4 dimensiones del perfil (ratio de gastos, nivel de deuda, capacidad de pago, probabilidad de incumplimiento)
-
-4. **Plazo óptimo automático** → si no se especifica plazo, el sistema calcula el número de meses ideal para que la cuota sea ≤ 30% del disponible mensual
+> El modelo identifica mejor a quienes sí pagan (recall 83%), siendo conservador al aprobar — comportamiento deseable en un contexto crediticio.
 
 ---
 
-## 🔗 Cómo las predicciones construyen la solución al usuario
+## 🔮 Predicciones y Motor de Decisión
 
-Las probabilidades del modelo no se muestran solas — se traducen en una experiencia completa:
+Para cada perfil, el modelo produce probabilidades via `predict_proba()` que alimentan un motor de reglas:
 
 ```
 predict_proba()
       ↓
-  Score 0–100 ── semáforo (BAJO / MEDIO / ALTO riesgo)
+  Score 0–100  ──→  Semáforo: BAJO / MEDIO / ALTO riesgo
       ↓
-  Decisión APROBADO / RECHAZADO
+  Decisión: APROBADO (score ≥ 50 y excedente > 0) / RECHAZADO
       ↓
   Indicadores: cuota mensual, excedente, ratio de gastos, nivel de deuda
       ↓
-  Proyección de ahorro a 3, 6 y 12 meses
+  Proyección de ahorro: 3, 6 y 12 meses
       ↓
   Recomendación personalizada con pasos concretos
 ```
 
-La predicción del modelo se convierte en orientación financiera accionable: si el modelo da alta probabilidad de no pagar, el sistema recomienda reducir gastos un 10–20% y ahorrar 3–6 meses antes de endeudarse.
+**Reglas generadas a partir de las predicciones:**
+
+| Condición | Comportamiento |
+|---|---|
+| `score ≥ 70` | Banner verde — APROBADO — recomendación de crecimiento |
+| `50 ≤ score < 70` | Banner neutro — APROBADO con advertencias — reducir gastos |
+| `score < 50` | Banner rojo — RECHAZADO — recomendación de ahorro previo |
+| `prob_no_paga > 0.7` | Penalización de -20 pts al score |
+| `excedente < 0` | Rechazo automático sin importar el score |
+| `tiempo = null` | Sistema calcula plazo óptimo iterando de 6 en 6 meses (cuota ≤ 30% del disponible) |
 
 ---
 
-## 🌐 Cómo llevamos la solución a la web
+## 🖥️ Arquitectura del Sistema
 
-El sistema corre completamente en local con dos componentes desacoplados:
-
-1. **Backend:** API REST construida con **FastAPI**, servida con **uvicorn** en `http://localhost:8000`
-2. **Frontend:** Archivo `index.html` estático que se abre directamente en el navegador
-
-La comunicación entre frontend y backend se hace mediante `fetch()` a los endpoints `/entrenar` y `/analizar`.
-
-**Pasos para ejecutar:**
-```bash
-# 1. Instalar dependencias
-pip install fastapi uvicorn scikit-learn pandas openpyxl numpy
-
-# 2. Ir a la carpeta del proyecto
-cd "ruta/del/proyecto"
-
-# 3. Levantar el backend
-uvicorn main:app --reload --port 8000
-
-# 4. Abrir index.html en el navegador (doble clic)
-```
-
----
-
-## 🖥️ Explicación del frontend y backend
+El sistema opera con dos componentes desacoplados:
 
 ### Backend — `main.py` + `model.py`
 
-**`model.py`** contiene toda la lógica ML y financiera:
-- Carga del dataset desde `Datos.xlsx`
-- Entrenamiento del modelo con `LogisticRegression` + `StandardScaler`
-- Validación cruzada de 5 pliegues
-- Funciones financieras: score, semáforo, segmentación, proyección de ahorro, plazo óptimo, recomendación
+**`model.py`** — lógica ML y financiera: entrenamiento, validación cruzada, score, semáforo, segmentación de cliente, proyección de ahorro, cálculo de plazo óptimo y generación de recomendación.
 
-**`main.py`** expone 3 endpoints REST con FastAPI:
+**`main.py`** — API REST con FastAPI:
 
 | Método | Endpoint | Descripción |
 |---|---|---|
-| `GET` | `/health` | Verifica si el modelo está entrenado |
-| `POST` | `/entrenar` | Carga el dataset y entrena el modelo |
-| `POST` | `/analizar` | Recibe perfil financiero y retorna el análisis completo |
+| `GET` | `/health` | Estado del modelo |
+| `POST` | `/entrenar` | Carga dataset y entrena el modelo |
+| `POST` | `/analizar` | Recibe perfil y retorna análisis completo |
 
 ### Frontend — `index.html` + `styles.css` + `app.js`
 
-La interfaz tiene 3 secciones:
+Interfaz de tres secciones:
 
-1. **Hero / Landing** → Presentación del producto con tarjetas informativas y pills de características
-2. **Cómo funciona** → Grid de 6 tarjetas explicando las capacidades del sistema
-3. **Analizador** → Flujo de dos pasos: entrenar el modelo → ingresar perfil → ver resultados
+1. **Hero / Landing** — presentación del producto con tarjetas y características
+2. **Cómo funciona** — grid de 6 tarjetas explicativas
+3. **Analizador** — flujo de dos pasos: entrenar modelo → ingresar perfil → ver resultados
 
-Los resultados incluyen: banner de decisión, 3 cards de capacidad de pago, gauge de score, gráfica de probabilidades, indicadores clave, donut de composición de ingresos, proyección de ahorro con barras, y recomendación personalizada.
-
----
-
-## ⚙️ Cómo las predicciones generan nuevas reglas y comportamientos
-
-Las salidas del modelo alimentan un motor de reglas en `model.py` que genera comportamiento dinámico:
-
-| Predicción | Regla generada | Comportamiento en el sistema |
-|---|---|---|
-| `score < 50` | Alto riesgo | Banner rojo, decisión RECHAZADO, recomendación de ahorro previo |
-| `50 ≤ score < 70` | Riesgo medio | Banner neutro, APROBADO con advertencias, recomendación de reducir gastos |
-| `score ≥ 70` | Bajo riesgo | Banner verde, APROBADO, recomendación de crecimiento |
-| `prob_no_paga > 0.7` | Penalización de score (-20 pts) | Score más bajo aunque otros indicadores sean buenos |
-| `excedente < 0` | Sin capacidad de pago | Rechazo automático sin importar el score |
-| `tiempo = null` | Calcular plazo óptimo | El sistema itera de 6 en 6 meses hasta encontrar cuota ≤ 30% del disponible |
+**Visualizaciones en el panel de resultados:**
+- Banner APROBADO / RECHAZADO con semáforo de riesgo
+- Cards de cuota mensual, disponible y excedente
+- Gauge de score 0–100
+- Gráfica de probabilidades (sí paga vs. no paga)
+- Indicadores clave con barras de progreso
+- Donut de composición del ingreso
+- Proyección de ahorro a 3, 6 y 12 meses
+- Recomendación personalizada
 
 ---
 
-## 🎨 Cómo funciona la interfaz y cuál es su objetivo
+## 🚀 Cómo Ejecutar el Proyecto
 
-**Objetivo:** Que cualquier persona, sin conocimientos financieros, pueda entender en menos de 1 minuto si puede o no asumir una deuda, y qué debe hacer al respecto.
+### 1. Requisitos previos
 
-**Flujo de uso:**
-1. El usuario entra a la página y ve una landing explicativa
-2. Hace clic en **"Entrenar modelo"** → el sistema carga los 1.150 perfiles y entrena la Regresión Logística (tarda ~2 segundos)
-3. Ingresa sus datos: ingresos, gastos, monto de la deuda y plazo opcional
-4. El sistema llama al backend, procesa el perfil y renderiza:
-   - Un **banner APROBADO / RECHAZADO** con el semáforo de riesgo
-   - **Cards** con cuota mensual, disponible y excedente
-   - **Gauge** con el score de 0–100
-   - **Gráfica de probabilidades** (sí paga vs. no paga)
-   - **Indicadores clave** con barras de progreso
-   - **Donut** de composición del ingreso mensual
-   - **Proyección de ahorro** a 3, 6 y 12 meses
-   - **Recomendación personalizada** con pasos concretos
+- Python 3.9+
+- Navegador moderno (Chrome, Firefox, Edge)
+
+### 2. Instalar dependencias
+
+```bash
+pip install fastapi uvicorn scikit-learn pandas openpyxl numpy
+```
+
+### 3. Iniciar el backend
+
+```bash
+# Navegar a la carpeta del proyecto
+cd "ruta/del/proyecto"
+
+# Levantar la API
+uvicorn main:app --reload --port 8000
+```
+
+La API queda disponible en `http://localhost:8000`. Puedes verificarla en `http://localhost:8000/health`.
+
+### 4. Abrir el frontend
+
+Abre el archivo `index.html` directamente en el navegador (doble clic). No requiere servidor web.
+
+### 5. Usar el sistema
+
+1. Clic en **"Entrenar modelo"** — carga los 1.150 perfiles y entrena (~2 segundos)
+2. Ingresa tus datos: ingresos, gastos, monto de la deuda y plazo (opcional)
+3. Clic en **"Analizar"** — el sistema retorna el análisis completo
 
 ---
 
-## 📁 Estructura del proyecto
+## 📁 Estructura del Proyecto
 
 ```
 Machine Learning/
-├── index.html                     # Estructura HTML de la interfaz
-├── styles.css                     # Estilos y diseño visual
-├── app.js                         # Lógica del frontend (Chart.js, API calls)
-├── main.py                        # API REST con FastAPI
-├── model.py                       # Lógica ML y funciones financieras
-├── Datos.xlsx                     # Dataset con 1.150 perfiles (hoja: MOCK_DATA)
-└── Instrucciones de Ejecución.txt # Guía de instalación y ejecución
+├── index.html       # Estructura HTML de la interfaz
+├── styles.css       # Estilos y diseño visual
+├── app.js           # Lógica del frontend (Chart.js, llamadas a la API)
+├── main.py          # API REST con FastAPI
+├── model.py         # Lógica ML y funciones financieras
+└── Datos.xlsx       # Dataset con 1.150 perfiles (hoja: MOCK_DATA)
 ```
+
+---
+
+## 🌐 Despliegue / Demo
+
+| Recurso | Link |
+|---|---|
+| 📁 Repositorio GitHub | _próximamente_ |
+| 🌍 Demo Web | _próximamente_ |
+| 🎬 Video en YouTube | _próximamente_ |
+
+---
+
+## ⚠️ Limitaciones y Trabajo Futuro
+
+El sistema funciona correctamente para su alcance académico, pero hay varias áreas de mejora identificadas:
+
+- **Dataset** — ampliar el volumen y reemplazar datos sintéticos por perfiles reales anonimizados
+- **Modelos** — comparar con Random Forest, XGBoost o redes neuronales para mejorar la accuracy
+- **Despliegue en la nube** — migrar el backend a Railway, Render o AWS para disponibilidad 24/7
+- **Autenticación** — sistema de login para que cada usuario guarde su historial de análisis
+- **Dashboard administrativo** — panel con estadísticas agregadas de todos los perfiles analizados
+- **Métricas adicionales** — incorporar AUC-ROC, matriz de confusión visual e importancia de variables
+- **Internacionalización** — adaptar el sistema a monedas y contextos financieros de otros países
 
 ---
 
