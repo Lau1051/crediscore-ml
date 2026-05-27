@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CrediScore — Análisis de Riesgo Financiero</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Epilogue:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<!-- ═══════════════════════ NAV ═══════════════════════ -->
+<nav>
+  <div class="nav-brand"><div class="nav-brand-dot"></div>CrediScore</div>
+  <div class="nav-links">
+    <a href="#landing">Inicio</a>
+    <a href="#features">Cómo funciona</a>
+    <a href="#analyzer">Analizar</a>
+  </div>
+  <div class="nav-pill" id="nav-pill">
+    <div class="pill-dot"></div>
+    <span id="pill-txt">Conectando…</span>
+  </div>
+</nav>
+
+<!-- ═══════════════════════ LANDING ═══════════════════════ -->
+<section id="landing">
+
+  <!-- IZQUIERDA: Título + CTA -->
+  <div class="hero-left">
+    <div class="hero-kicker">Inteligencia Financiera con ML</div>
+    <h1 class="hero-title">Conoce tu<br><em>capacidad real</em><br>de endeudarte</h1>
+    <p class="hero-description">
+        Analiza tus ingresos, gastos y nivel de riesgo con inteligencia artificial.
+        Obtén una recomendación financiera clara, elegante y profesional.
+      </p>
+
+      <div class="cta-row">
+      <a href="#analyzer" class="btn btn-dark">Analizar mi perfil →</a>
+      <a href="#features" class="btn btn-outline">Cómo funciona</a>
+    </div>
+  </div>
+
+  <!-- DERECHA: Texto explicativo -->
+  <div class="hero-right">
+    <div class="hero-right-card">
+      <div class="hrc-eyebrow">Por qué importa</div>
+      <div class="hrc-title">Las finanzas personales no deberían ser un misterio</div>
+      <div class="hrc-body">
+        Todos, en algún momento, necesitamos tomar decisiones que involucran deudas: un crédito de consumo,
+        un electrodoméstico a cuotas, un préstamo para emprender. El problema es que pocas veces sabemos
+        con certeza <strong>si realmente podemos asumirlo</strong> sin comprometer nuestra estabilidad.
+        <br><br>
+        CrediScore analiza tu perfil financiero real —ingresos, gastos y deuda— y te dice, con inteligencia
+        artificial, qué tan viable es esa deuda para ti, cuánto riesgo representa y cuál es el plazo ideal
+        para que sea <strong>sostenible en el tiempo</strong>.
+      </div>
+    </div>
+    <div class="hero-pills">
+      <div class="hero-pill"><span>📊</span> Score financiero 0–100</div>
+      <div class="hero-pill"><span>🤖</span> Modelo ML con 1.150 perfiles</div>
+      <div class="hero-pill"><span>⏱️</span> Plazo óptimo automático</div>
+      <div class="hero-pill"><span>💡</span> Recomendación personalizada</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════ FEATURES ═══════════════════════ -->
+<section id="features">
+  <div class="features-inner">
+    <div class="features-head">
+      <div class="section-kicker">Capacidades del sistema</div>
+      <div class="section-title">Todo lo que analiza CrediScore</div>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card">
+        <div class="feat-icon">🧠</div>
+        <div class="feat-title">Modelo de Machine Learning</div>
+        <div class="feat-desc">Regresión Logística entrenada con validación cruzada de 5 pliegues. El modelo aprende patrones de comportamiento de pago a partir de datos reales.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">📊</div>
+        <div class="feat-title">Score financiero 0–100</div>
+        <div class="feat-desc">Puntaje compuesto que combina ratio de gastos, nivel de deuda, capacidad de pago y probabilidad de incumplimiento en una sola métrica.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🎯</div>
+        <div class="feat-title">Probabilidades de pago</div>
+        <div class="feat-desc">El modelo entrega la probabilidad exacta de que el cliente cumpla o incumpla con la deuda, basada en su perfil financiero actual.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">⏱️</div>
+        <div class="feat-title">Plazo óptimo automático</div>
+        <div class="feat-desc">Si no tienes un plazo definido, el sistema calcula el número de meses ideal para que la cuota sea sostenible dentro de tu capacidad de pago.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">📈</div>
+        <div class="feat-title">Proyección de ahorro</div>
+        <div class="feat-desc">Calcula cuánto podrías ahorrar a 3, 6 y 12 meses si mantienes tu excedente mensual, visualizado con gráficas de barras y progreso.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">💡</div>
+        <div class="feat-title">Recomendación personalizada</div>
+        <div class="feat-desc">Diagnóstico detallado de tu situación con pasos concretos: si debes reducir gastos, ahorrar antes de endeudarte, o si estás listo para asumir la deuda.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ ANALYZER ═══════════════════════ -->
+<section id="analyzer">
+  <div class="analyzer-head">
+    <div class="section-kicker">Herramienta de análisis</div>
+    <div class="section-title">Analiza tu perfil financiero</div>
+    <p>Entrena el modelo una vez y luego ingresa tus datos para obtener el análisis completo.</p>
+  </div>
+
+  <!-- TRAIN CARD -->
+  <div class="train-card">
+    <div class="tc-left">
+      <div class="tc-title">Paso 1 — Entrenar el modelo con el dataset</div>
+      <div class="tc-desc">Carga los 1.150 registros del archivo <strong style="color:rgba(255,255,255,.75)">Datos.xlsx</strong> y entrena el modelo de <strong style="color:rgba(255,255,255,.75)">Regresión Logística</strong>. Solo necesitas hacerlo una vez por sesión.</div>
+      <div class="tc-meta" id="tc-meta">
+        <div class="tc-stat">Registros: <strong id="m-reg">—</strong></div>
+        <div class="tc-stat">Pagan: <strong id="m-pagan">—</strong></div>
+        <div class="tc-stat">No pagan: <strong id="m-nopagan">—</strong></div>
+      </div>
+    </div>
+    <button class="btn btn-teal" id="btn-train" onclick="entrenar()">⚡ Entrenar modelo</button>
+  </div>
+
+  <!-- ANALYZER LAYOUT -->
+  <div class="analyzer-layout">
+
+    <!-- FORMULARIO -->
+    <div class="form-card">
+      <div class="fc-title">Paso 2 — Tu perfil financiero</div>
+      <div class="fc-desc">Ingresa tus datos reales. El modelo ML calculará tu riesgo crediticio y te dará una decisión fundamentada.</div>
+
+      <div class="field">
+  <label>Ingresos mensuales ($)</label>
+  <div class="input-prefix-wrap">
+    <input type="text" id="f-ingreso" placeholder="0" oninput="fmtMiles(this)"/>
+    <span class="prefix-sign">$</span>
+  </div>
+  <div class="field-hint">Salario u otros ingresos totales al mes</div>
+</div>
+<div class="field">
+  <label>Gastos mensuales ($)</label>
+  <div class="input-prefix-wrap">
+    <input type="text" id="f-gastos" placeholder="0" oninput="fmtMiles(this)"/>
+    <span class="prefix-sign">$</span>
+  </div>
+  <div class="field-hint">Arriendo, servicios, comida, transporte, etc.</div>
+</div>
+<div class="field">
+  <label>Monto total de la deuda ($)</label>
+  <div class="input-prefix-wrap">
+    <input type="text" id="f-deuda" placeholder="0" oninput="fmtMiles(this)"/>
+    <span class="prefix-sign">$</span>
+  </div>
+  <div class="field-hint">Total a financiar, no la cuota mensual</div>
+</div>
+      <div class="field">
+        <label>Plazo en meses <span style="font-weight:400;text-transform:none;color:var(--muted)">(opcional)</span></label>
+        <input type="text" id="f-tiempo" placeholder="" oninput="fmtEntero(this)"/>
+        <div class="field-hint">Si lo dejas vacío, calculamos el plazo ideal para ti</div>
+      </div>
+
+      <hr class="divider"/>
+      <button class="btn btn-dark btn-full" id="btn-analizar" onclick="analizar()" disabled>
+        Analizar mi perfil →
+      </button>
+    </div>
+
+    <!-- RESULTADOS -->
+    <div class="result-area" id="results">
+      <div class="empty-state">
+        <div class="empty-icon">📋</div>
+        <p>Primero entrena el modelo (Paso 1), luego completa tu perfil financiero para ver el análisis completo con gráficas.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <strong>CrediScore</strong> — Analizador de Riesgo Financiero con Machine Learning<br>
+  Modelo entrenado con 1.150 perfiles reales · Regresión Logística con validación cruzada<br>
+  Los resultados son orientativos y no constituyen asesoría financiera profesional.
+</footer>
+
+<!-- ═══════════════════════ SCRIPTS ═══════════════════════ -->
+<script src="app.js"></script>
+</body>
+</html>

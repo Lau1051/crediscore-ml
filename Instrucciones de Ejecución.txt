@@ -1,0 +1,12 @@
+INSTRUCCIONES EJECUTAR DESARROLLO ML
+
+1. Primero instala las librerías necesarias:
+	pip install fastapi uvicorn scikit-learn pandas openpyxl numpy
+
+2. Entra a la carpeta del proyecto:
+	cd + "Ruta del archivo"
+
+3. Levanta el backend:
+	uvicorn main:app --reload --port 8000
+
+4. Abre el archivo index.html directamente con doble clic en el explorador de archivos
