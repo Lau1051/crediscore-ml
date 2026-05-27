@@ -4,7 +4,7 @@
 
 ---
 
-## 🧭 Resumen Ejecutivo
+## 🧭 Resumen
 
 **CrediScore** es una solución de inteligencia artificial orientada a democratizar el análisis crediticio. Muchas personas no tienen acceso a las herramientas que usan bancos y entidades financieras para evaluar si pueden asumir una deuda de forma responsable.
 
