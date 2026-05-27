@@ -243,7 +243,7 @@ Machine Learning/
 | 📁 Repositorio GitHub | [github.com/lau1051/crediscore-ml](https://github.com/lau1051/crediscore-ml) |
 | 🌍 Demo Web | [lau1051.github.io/crediscore-ml](https://lau1051.github.io/crediscore-ml/) |
 | ⚙️ Backend API | [crediscore-ml.onrender.com](https://crediscore-ml.onrender.com) |
-| 🎬 Video en YouTube | [[crediscore-ml.onrender.com](https://youtu.be/2VK6iPN9OcI) |
+| 🎬 Video en YouTube | [Video CrediScore](https://youtu.be/2VK6iPN9OcI) |
 
 ---
 
