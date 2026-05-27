@@ -247,6 +247,5 @@ Machine Learning/
 
 ---
 
----
 
 *Proyecto desarrollado para la materia de Inteligencia Artificial · 2026*
