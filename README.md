@@ -79,9 +79,21 @@ Modelo de clasificación binaria supervisada que predice la probabilidad de que 
 
 **¿Por qué este modelo?**
 
+Se evaluaron tres algoritmos de clasificación antes de tomar la decisión:
+
+| Modelo | Accuracy (test) | Accuracy (CV=5) | Comportamiento |
+|---|---|---|---|
+| Decision Tree | Alto | Bajo | Sobreajuste — caída fuerte en validación cruzada |
+| Random Forest | Alto | Bajo | Sobreajuste — caída fuerte en validación cruzada |
+| **Logistic Regression** | **72.75%** | **68.09%** | **Estable — consistente entre test y CV** |
+
+Decision Tree y Random Forest obtenían accuracy altas en el conjunto de prueba, pero al aplicar validación cruzada de 5 pliegues el porcentaje caía considerablemente, lo que indica sobreajuste al conjunto de entrenamiento. La Regresión Logística fue el modelo más estable y confiable entre ambas métricas, por lo que se seleccionó como modelo definitivo.
+
+Razones adicionales para su elección:
+
 1. **Interpretabilidad** — entrega probabilidades directas (ej. "78% de probabilidad de pagar"), fundamentales para explicar una decisión crediticia
 2. **Adecuación al problema** — clasificación binaria es exactamente su caso de uso
-3. **Eficiencia** — con 1.150 registros y 4 features, un modelo simple generaliza mejor que uno complejo
+3. **Generalización** — con 1.150 registros y 4 features, un modelo simple generaliza mejor que uno complejo
 4. **Ligereza** — se serializa y sirve en tiempo real sin latencia apreciable
 
 ---
