@@ -4,7 +4,7 @@
 
 ---
 
-## 🧭 Resumen
+## 🧭 Resumen Ejecutivo
 
 **CrediScore** es una solución de inteligencia artificial orientada a democratizar el análisis crediticio. Muchas personas no tienen acceso a las herramientas que usan bancos y entidades financieras para evaluar si pueden asumir una deuda de forma responsable.
 
@@ -233,5 +233,20 @@ Machine Learning/
 ├── model.py         # Lógica ML y funciones financieras
 └── Datos.xlsx       # Dataset con 1.150 perfiles (hoja: MOCK_DATA)
 ```
+
+---
+
+## 🌐 Despliegue / Demo
+
+| Recurso | Link |
+|---|---|
+| 📁 Repositorio GitHub | [github.com/lau1051/crediscore-ml](https://github.com/lau1051/crediscore-ml) |
+| 🌍 Demo Web | [lau1051.github.io/crediscore-ml](https://lau1051.github.io/crediscore-ml/) |
+| ⚙️ Backend API | [crediscore-ml.onrender.com](https://crediscore-ml.onrender.com) |
+| 🎬 Video en YouTube | _próximamente_ |
+
+---
+
+---
 
 *Proyecto desarrollado para la materia de Inteligencia Artificial · 2026*
