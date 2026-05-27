@@ -234,30 +234,4 @@ Machine Learning/
 └── Datos.xlsx       # Dataset con 1.150 perfiles (hoja: MOCK_DATA)
 ```
 
----
-
-## 🌐 Despliegue / Demo
-
-| Recurso | Link |
-|---|---|
-| 📁 Repositorio GitHub | _próximamente_ |
-| 🌍 Demo Web | _próximamente_ |
-| 🎬 Video en YouTube | _próximamente_ |
-
----
-
-## ⚠️ Limitaciones y Trabajo Futuro
-
-El sistema funciona correctamente para su alcance académico, pero hay varias áreas de mejora identificadas:
-
-- **Dataset** — ampliar el volumen y reemplazar datos sintéticos por perfiles reales anonimizados
-- **Modelos** — comparar con Random Forest, XGBoost o redes neuronales para mejorar la accuracy
-- **Despliegue en la nube** — migrar el backend a Railway, Render o AWS para disponibilidad 24/7
-- **Autenticación** — sistema de login para que cada usuario guarde su historial de análisis
-- **Dashboard administrativo** — panel con estadísticas agregadas de todos los perfiles analizados
-- **Métricas adicionales** — incorporar AUC-ROC, matriz de confusión visual e importancia de variables
-- **Internacionalización** — adaptar el sistema a monedas y contextos financieros de otros países
-
----
-
 *Proyecto desarrollado para la materia de Inteligencia Artificial · 2026*
