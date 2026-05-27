@@ -1,4 +1,4 @@
-const API = 'http://localhost:8000';
+const API = 'https://crediscore-ml.onrender.com';
 let modeloOk = false;
 let charts = {};
 
